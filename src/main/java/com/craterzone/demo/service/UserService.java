@@ -25,10 +25,10 @@ public class UserService {
 		{
 			return null;
 		}
+		UserDao userDao = UserMapper.UserToUserDao(user);
+		repo.save(userDao);
 		
-		//repo.save(new UserDao(user.getName(),user.getUsername(),user.getPassword(),user.getAddress(),user.getContact(),user.getEmail()));
 		
-		//return Optional.of(UserMapper.UserDaoToUser(user1));
 		return Optional.of(user);
 		
 	}

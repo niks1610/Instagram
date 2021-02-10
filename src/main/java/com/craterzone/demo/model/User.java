@@ -22,7 +22,6 @@ public class User {
 	private ContactNo contact;
 	@NotNull
 	private String username;
-
 	@NotNull
 	@Email
 	private String email;
@@ -31,7 +30,7 @@ public class User {
 	private String password;
 	
 	//parameterized constructor
-	public User(String name,String username, Address address,ContactNo contact,String email,String password) {
+	public User(String name,String username,String password, Address address,ContactNo contact,String email) {
 		
 		this.name=name;
 		this.username = username;

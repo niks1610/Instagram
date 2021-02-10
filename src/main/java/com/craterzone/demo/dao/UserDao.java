@@ -1,6 +1,6 @@
 package com.craterzone.demo.dao;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 
-import com.craterzone.demo.model.Address;
-import com.craterzone.demo.model.ContactNo;
 
 @Entity
 @Table(name = "users")
@@ -25,18 +21,11 @@ public class UserDao {
 	@Column
 	private String name;
 	@Column(name = "username",unique = true)
-	private String userName;
+	private String username;
 	@Column
 	private String password;
-	//@OneToOne (targetEntity = Address.class)
-	//private int address;
-	//@OneToOne
-	//@JoinColumn(name = "contact_id")
-	//private ContactNo contact;
-	
 	@OneToOne(mappedBy = "user")
 	private AddressDao address;
-
 	@OneToOne(mappedBy = "user")
 	private ContactDao contact;
 	@Column(unique = true)
@@ -48,12 +37,12 @@ public class UserDao {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserDao(String name, String userName, String password, AddressDao address, ContactDao contact,
+	public UserDao(String name, String username, String password, AddressDao address, ContactDao contact,
 			String email) {
 		super();
 		//this.id = id;
 		this.name = name;
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 		this.address = address;
 		this.contact = contact;
@@ -71,11 +60,11 @@ public class UserDao {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
@@ -104,7 +93,7 @@ public class UserDao {
 	
 	@Override
 	public String toString() {
-		return "UserDao [id=" + user_id + ", name=" + name + ", userName=" + userName + ", password=" + password
+		return "UserDao [id=" + user_id + ", name=" + name + ", userName=" + username + ", password=" + password
 				+ ", address=" + address + ", contact=" + contact + ", email=" + email + "]";
 	}
 	

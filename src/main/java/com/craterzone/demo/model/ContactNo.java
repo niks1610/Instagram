@@ -12,10 +12,9 @@ public class ContactNo {
 	@NotNull
 	private String number;
 	
-	public ContactNo(String cc,String mobileno)
-	{
+	public ContactNo(String cc,String number){
 		this.cc = cc;
-		this.number = mobileno;
+		this.number = number;
 	}
 
 	public String getCc() {
@@ -26,11 +25,11 @@ public class ContactNo {
 		this.cc = cc;
 	}
 
-	public String getMobileno() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setMobileno(String number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

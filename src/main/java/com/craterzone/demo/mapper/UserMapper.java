@@ -1,5 +1,7 @@
 package com.craterzone.demo.mapper;
 
+import org.springframework.beans.BeanUtils;
+
 import com.craterzone.demo.dao.UserDao;
 import com.craterzone.demo.model.User;
 
@@ -14,7 +16,9 @@ public class UserMapper {
      	
 	public static UserDao UserToUserDao(User user)
 	{
-		return new UserDao();
+		UserDao userDao = new UserDao();
+		BeanUtils.copyProperties(user, userDao);
+		return userDao;
 	
 	}
 }
