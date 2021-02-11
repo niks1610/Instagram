@@ -40,7 +40,7 @@ public class AddressDao {
 	@Column
 	private String longitude;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "user_id")
 	@JsonBackReference
 	private UserDao user;

@@ -65,12 +65,23 @@ public class UserController {
 	@PatchMapping("{id}/address")
 	public ResponseEntity updateAddress(@PathVariable(name = "id") int id,@RequestBody Address address)
 	{
-		Optional<User> user = usersService.updateAddress(id, address);
+		Optional<User> user = usersService.updateAddress(id, address);//
+		 if(user.isPresent())
+		 {
+			 return ResponseEntity.status(HttpStatus.OK).body(user);
+		 }
 		
-		if(user.isPresent()){
-			return ResponseEntity.status(HttpStatus.OK).body(user);
-		}
-		return ResponseEntity.badRequest().build();
+		   
+		
+		  return ResponseEntity.badRequest().build();
+		
+		
+//		 int k =usersService.updateAddress(id, address);
+//			
+//		    if(k>0)
+//		    	return ResponseEntity.status(HttpStatus.OK).body(null);
+//		    else
+//		    	return ResponseEntity.noContent().build();
 		
 	}
 	
@@ -79,10 +90,15 @@ public class UserController {
 //	 * reqservice.delete(id); }
 //	 */
 	
-//	@DeleteMapping("/delete/{id}")
-//	public void delete(@PathVariable(name = "id") int id)
-//	{
-//		usersService.deleteUser(id);
-//	}
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity delete(@PathVariable(name = "id") int id)
+	{
+		boolean result = usersService.deleteUser(id);
+		if(result)
+		{
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		}
+		return ResponseEntity.badRequest().build();
+	}
 	
 }

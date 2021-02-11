@@ -43,14 +43,17 @@ public class Address {
 	}
 	
 	
-	//setter and getter methods
-	public String getHouseno() {
+	public String getHouseNo() {
 		return houseNo;
 	}
-	
-	public void setHouseno(String houseNo) {
+
+
+	public void setHouseNo(String houseNo) {
 		this.houseNo = houseNo;
 	}
+
+
+	//setter and getter methods
 	
 	public String getStreet() {
 		return street;

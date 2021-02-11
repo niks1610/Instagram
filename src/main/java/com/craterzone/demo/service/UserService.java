@@ -2,6 +2,7 @@ package com.craterzone.demo.service;
 
 import java.util.*;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,10 +57,36 @@ public class UserService {
     	 Optional<UserDao> user = repo.findById(id);
     	 
     	 if(user.isPresent()) {
-    		 user.get().setAddress(UserMapper.addressToAddressDao(address));
+    		// AddressDao addressDao =UserMapper.addressToAddressDao(address);
+    		 
+    		 AddressDao addressToUpdate = user.get().getAddress();
+    		 BeanUtils.copyProperties(address, addressToUpdate);
+    		 
     		 repo.save(user.get());
     	 }
     	 
     	 return Optional.of(UserMapper.UserDaoToUser(user.get()));
+    	
+    	
+//    	AddressDao addressDao =UserMapper.addressToAddressDao(address);
+//    	return repo.updateAddress(addressDao,id);
+    	
+    	
+    	
+    	
+    	
+    }
+    
+    public boolean deleteUser(int id)
+    {
+    	Optional<UserDao> user = repo.findById(id);
+    	
+    	if(user.isPresent())
+    	{
+    		repo.delete(user.get());
+    		return true;
+    	}
+    	
+    	return false;
     }
 }
