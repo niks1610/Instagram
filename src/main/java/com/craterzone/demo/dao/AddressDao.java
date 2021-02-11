@@ -1,5 +1,6 @@
 package com.craterzone.demo.dao;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.craterzone.demo.model.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "address")
@@ -19,7 +21,7 @@ public class AddressDao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column
+	@Column(name = "house_no")
 	private String houseNo;
 	@Column
 	private String street;
@@ -33,12 +35,32 @@ public class AddressDao {
 	private String country;
 	@Column
 	private int pincode;
+	@Column
 	private String latitude;
+	@Column
 	private String longitude;
-	@OneToOne
-	@JoinColumn(name ="user_id")
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	@JsonBackReference
 	private UserDao user;
 	
+	public AddressDao() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public UserDao getUser() {
+		return user;
+	}
+	public void setUser(UserDao user) {
+		this.user = user;
+	}
 	public AddressDao(@NotNull String houseNo, @NotNull String street, @NotNull String landmark, @NotNull String city,
 			@NotNull String state, @NotNull String country, @NotNull int pincode, String latitude, String longitude) {
 		super();

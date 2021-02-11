@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 
 public class ContactNo {
 	
+	
+
 	@Id
 	private int id;
 	@NotNull
@@ -15,6 +17,11 @@ public class ContactNo {
 	public ContactNo(String cc,String number){
 		this.cc = cc;
 		this.number = number;
+	}
+	
+	public ContactNo() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getCc() {

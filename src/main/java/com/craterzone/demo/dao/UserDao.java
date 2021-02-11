@@ -1,6 +1,7 @@
 package com.craterzone.demo.dao;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +11,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name = "users")
 public class UserDao {
+
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,9 +34,11 @@ public class UserDao {
 	private String username;
 	@Column
 	private String password;
-	@OneToOne(mappedBy = "user")
+	@OneToOne(cascade  = CascadeType.ALL, mappedBy = "user")
+	@JsonManagedReference
 	private AddressDao address;
-	@OneToOne(mappedBy = "user")
+	@OneToOne(cascade  = CascadeType.ALL, mappedBy = "user")
+	@JsonManagedReference
 	private ContactDao contact;
 	@Column(unique = true)
 	private String email;

@@ -12,7 +12,8 @@ import java.util.*;
 
 public interface UserRepository extends JpaRepository<UserDao,Integer>{
 	
-	Optional<User> findByEmail(String email);
+	Optional<UserDao> findByEmail(String email);
+	
 
 	
 

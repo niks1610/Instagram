@@ -25,6 +25,13 @@ public class ContactDao {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private UserDao user;
+	
+	public UserDao getUser() {
+		return user;
+	}
+	public void setUser(UserDao user) {
+		this.user = user;
+	}
 	public ContactDao(int id, String cc, String number) {
 		super();
 		this.id = id;
