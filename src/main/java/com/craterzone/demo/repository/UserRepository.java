@@ -12,6 +12,7 @@ import java.util.*;
 public interface UserRepository extends JpaRepository<UserDao,Integer>{
 	
 	Optional<UserDao> findByEmail(String email);
+	Optional<UserDao> findByUsername(String username);
 	
 	@Modifying
 	@Transactional

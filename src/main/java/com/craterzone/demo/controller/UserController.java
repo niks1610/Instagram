@@ -10,14 +10,11 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.craterzone.demo.service.*;
 import com.craterzone.demo.model.User;
-import com.craterzone.demo.mapper.UserMapper;
 import com.craterzone.demo.model.Address;
-import com.craterzone.demo.repository.*;
 import java.util.*;
 
 import javax.validation.Valid;
@@ -42,7 +39,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<Optional<User>> login(@RequestBody User user){
+	public ResponseEntity<Optional<User>> login(@Valid @RequestBody User user){
 		Optional<User> userDB = usersService.getUser(user);
 		if(userDB!=null){
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(userDB);
@@ -63,12 +60,12 @@ public class UserController {
 	}
 	
 	@PatchMapping("{id}/address")
-	public ResponseEntity updateAddress(@PathVariable(name = "id") int id,@RequestBody Address address)
+	public ResponseEntity<User> updateAddress(@PathVariable(name = "id") int id,@RequestBody Address address)
 	{
 		Optional<User> user = usersService.updateAddress(id, address);//
 		 if(user.isPresent())
 		 {
-			 return ResponseEntity.status(HttpStatus.OK).body(user);
+			 return ResponseEntity.status(HttpStatus.OK).body(user.get());
 		 }
 		
 		   
