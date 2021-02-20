@@ -48,6 +48,16 @@ public class UserService {
 		return null;
 	}
 	
+	public Optional<User> getUserById(int id){
+		Optional<UserDao> userDb = repo.findById(id);
+		
+		if(userDb.isPresent()) {
+			System.out.println("Getting user from database");
+			return Optional.of(UserMapper.UserDaoToUser(userDb.get()));
+		}
+		return null;
+	}
+	
     public Optional<List<User>> getAll(){
     	List<UserDao> list = repo.findAll();
     	return Optional.of(UserMapper.UserDaoListToUserList(list));	
@@ -70,12 +80,7 @@ public class UserService {
     	
 //    	AddressDao addressDao =UserMapper.addressToAddressDao(address);
 //    	return repo.updateAddress(addressDao,id);
-    	
-    	
-    	
-    	
-    	
-    }
+     }
     
     public boolean deleteUser(int id)
     {
